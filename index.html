@@ -24,7 +24,6 @@
 
         body, html {
             font-family: 'Roboto', sans-serif;
-            background: var(--dark-bg);
             color: var(--text-color);
             height: 100%;
             line-height: 1.6;
@@ -38,6 +37,9 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            background: rgba(26, 26, 46, 0.7); /* 增加不透明度 */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .chat-header {
@@ -53,57 +55,105 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05); /* 稍微降低透明度 */
             border-radius: 0 0 10px 10px;
         }
 
         .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover; /* 确保图片填满头像圆圈 */
+            border: 2px solid var(--secondary-color);
+        }
+
+        .message-content {
+            flex: 0 1 auto;
+            padding: 12px 16px;
             border-radius: 18px;
-            max-width: 80%;
+            max-width: calc(80% - 50px);
+            display: inline-block;
+            word-wrap: break-word;
+            font-size: 15px;
+            line-height: 1.4;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .user-message {
-            background: var(--primary-color);
-            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .user-message .message-avatar {
+            margin-right: 0;
+            margin-left: 12px;
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-bottom-right-radius: 4px;
             margin-left: auto;
         }
 
-        .ai-message {
-            background: var(--light-bg);
-            align-self: flex-start;
+        .ai-message .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            border-bottom-left-radius: 4px;
         }
 
+        /* 添加悬停效果 */
+        .message-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 改进输入区域样式 */
         .input-area {
             display: flex;
-            padding: 20px 0;
+            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            margin-top: 20px;
         }
 
         #user-input {
             flex-grow: 1;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
             border-radius: 25px;
-            background: var(--input-bg);
+            background: transparent;
             color: var(--text-color);
             font-size: 16px;
         }
 
-        #send-button, #emoji-button {
+        #send-button, #emoji-button, .file-label {
             background: var(--primary-color);
-            color: var(--text-color);
+            color: white;
             border: none;
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            margin-left: 10px;
+            margin: 0 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
 
-        #send-button:hover, #emoji-button:hover {
+        #send-button:hover, #emoji-button:hover, .file-label:hover {
             transform: scale(1.1);
+            background: var(--secondary-color);
         }
 
         .auth-form {
@@ -214,15 +264,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://media.giphy.com/media/mX1bWOEGPIAY1yhmKI/giphy.gif');
-            background-size: cover;
+            background-image: url('BJ.jpg');
+            background-size: contain; /* 改为 contain 以确保整个图像可见 */
             background-position: center;
             background-repeat: no-repeat;
+            background-color: var(--dark-bg); /* 添加背景色，填充可能的空白区域 */
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.8; /* 稍微增加不透明度 */
+            filter: blur(0px); /* 移除模糊效果 */
         }
 
-        /* 添加 AI 思考动画样式 */
+        /* 添加 AI 考动画样式 */
         .thinking-animation {
             display: flex;
             align-items: center;
@@ -324,6 +376,43 @@
             margin-right: 10px;
             font-size: 24px;
         }
+
+        /* 现有的 CSS 样式... */
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .avatar-upload {
+            display: none;
+        }
+
+        .avatar-upload-label {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 添加文本阴影以提高可读性 */
+        .message-content {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* 增强文本阴影 */
+        }
+
+        .ai-message .message-avatar {
+            background-color: var(--primary-color); /* 为AI头像添加背景色 */
+        }
     </style>
 </head>
 <body>
@@ -365,6 +454,17 @@
                 <h1>NeoMind AI</h1>
                 <button id="login-button">登录/注册</button>
             </div>
+            
+            <!-- 将 profile-section 移到这里 -->
+            <div id="profile-section" class="profile-section" style="display: none;">
+                <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/60" alt="用户头像">
+                <div>
+                    <h3 id="profile-username"></h3>
+                    <label for="avatar-upload" class="avatar-upload-label">更换头像</label>
+                    <input type="file" id="avatar-upload" class="avatar-upload" accept="image/*">
+                </div>
+            </div>
+            
             <div id="chatbox"></div>
             <div class="input-area">
                 <button id="emoji-button">😊</button>
@@ -420,6 +520,7 @@
             if (fileInput) fileInput.addEventListener('change', handleFileSelect);
 
             document.getElementById('login-button').addEventListener('click', handleLoginButtonClick);
+            document.getElementById('avatar-upload').addEventListener('change', handleAvatarUpload);
         }
 
         function showRegisterForm() {
@@ -441,6 +542,13 @@
             authContainer.style.display = 'none';
             chatContainer.style.display = 'flex';
             document.getElementById('login-button').textContent = '退出';
+            
+            // 显示用户信息
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (currentUser) {
+                updateProfileSection(currentUser);
+                document.getElementById('profile-section').style.display = 'flex';
+            }
         }
 
         function initializeGuestQuestionCount() {
@@ -474,13 +582,53 @@
             
             if (user) {
                 sessionStorage.setItem('currentUser', JSON.stringify(user));
-                localStorage.removeItem('guestQuestionCount'); // 登录后清除访客提问次数
+                localStorage.removeItem('guestQuestionCount');
                 guestQuestionCount = 0;
-                showChatInterface();
+                showChatInterface(); // 这将显示用户信息
                 clearChatHistory();
                 addMessage('ai', `欢迎回来，${user.username}！👋 有什么我可以帮助你的吗？`);
             } else {
                 alert('用户名或密码错误');
+            }
+        }
+
+        function updateProfileSection(user) {
+            const profileSection = document.getElementById('profile-section');
+            const profileAvatar = document.getElementById('profile-avatar');
+            const profileUsername = document.getElementById('profile-username');
+
+            profileSection.style.display = 'flex';
+            profileUsername.textContent = user.username;
+            if (user.avatar) {
+                profileAvatar.src = user.avatar;
+            }
+        }
+
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatarDataUrl = e.target.result;
+                    updateUserAvatar(avatarDataUrl);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateUserAvatar(avatarDataUrl) {
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (currentUser) {
+                currentUser.avatar = avatarDataUrl;
+                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const updatedUsers = users.map(user => 
+                    user.username === currentUser.username ? {...user, avatar: avatarDataUrl} : user
+                );
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+                document.getElementById('profile-avatar').src = avatarDataUrl;
             }
         }
 
@@ -508,9 +656,10 @@
 
         function logout() {
             sessionStorage.removeItem('currentUser');
-            localStorage.removeItem('guestQuestionCount'); // 登出时清除访客提问次数
+            localStorage.removeItem('guestQuestionCount');
             guestQuestionCount = 0;
             document.getElementById('login-button').textContent = '登录/注册';
+            document.getElementById('profile-section').style.display = 'none'; // 隐藏用户信息
             clearChatHistory();
             addMessage('ai', '欢迎使用我们的AI服务！作为游客，您可以免费提问3次。注册账户后可无限制使用。');
             updateRemainingQuestions();
@@ -538,7 +687,7 @@
             } else {
                 document.getElementById('login-button').textContent = '登录/注册';
                 addWelcomeMessage();
-                addMessage('ai', '作为游客，您可以免费提问3次。注册账户后可无限制使用我们的AI服务。');
+                addMessage('ai', '作为游客，您可以免费提3次。注册账户后可无限制使用我们的AI服务。');
                 updateRemainingQuestions();
             }
         }
@@ -606,7 +755,24 @@
         function addMessage(sender, message) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', `${sender}-message`);
-            messageElement.innerHTML = message; // 使用 innerHTML 来支持图片和文件信息的显示
+            
+            const avatarElement = document.createElement('img');
+            avatarElement.classList.add('message-avatar');
+            
+            if (sender === 'ai') {
+                avatarElement.src = 'AItx.jpg'; // 更改为 AItx.jpg
+            } else {
+                const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+                avatarElement.src = currentUser && currentUser.avatar ? currentUser.avatar : 'https://via.placeholder.com/40';
+            }
+            
+            const contentElement = document.createElement('div');
+            contentElement.classList.add('message-content');
+            contentElement.innerHTML = message;
+            
+            messageElement.appendChild(avatarElement);
+            messageElement.appendChild(contentElement);
+            
             chatbox.appendChild(messageElement);
             chatbox.scrollTop = chatbox.scrollHeight;
         }
