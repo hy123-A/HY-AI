@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeoMind AI - 智能聊天机器人</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -55,7 +56,7 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05); /* 稍微降低透明度 */
+            background: rgba(255, 255, 255, 0.05); /* 降低透明度 */
             border-radius: 0 0 10px 10px;
         }
 
@@ -170,31 +171,72 @@
         .auth-form h2 {
             text-align: center;
             margin-bottom: 20px;
+            color: var(--secondary-color);
         }
 
         .auth-form input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
             border: none;
             border-radius: 5px;
             background: var(--input-bg);
             color: var(--text-color);
+            font-size: 16px;
         }
 
-        .auth-form button {
+        .primary-button, .secondary-button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 5px;
-            background: var(--primary-color);
-            color: var(--text-color);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: bold;
         }
 
-        .auth-form button:hover {
+        .primary-button {
+            background: var(--primary-color);
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .primary-button:hover {
             background: var(--secondary-color);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .secondary-button:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .admin-login-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .admin-login-btn:hover {
+            color: var(--secondary-color);
         }
 
         .switch-form {
@@ -229,18 +271,19 @@
         }
 
         #login-button {
-            background: none;
-            border: 2px solid var(--text-color);
-            color: var(--text-color);
-            padding: 5px 15px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 14px;
         }
 
         #login-button:hover {
-            background: var(--text-color);
-            color: var(--dark-bg);
+            background-color: white;
+            color: var(--primary-color);
         }
 
         .welcome-message {
@@ -332,7 +375,7 @@
             transform: scale(1.2);
         }
 
-        /* 保持原有的样式，并添加以下新样式 */
+        /* 保持有的样式，并添加以下新样式 */
         .file-input {
             display: none;
         }
@@ -413,6 +456,325 @@
         .ai-message .message-avatar {
             background-color: var(--primary-color); /* 为AI头像添加背景色 */
         }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .admin-login-form {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-login-icon {
+            font-size: 64px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .admin-login-form input {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .admin-login-form input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-bottom-color: white;
+            outline: none;
+        }
+
+        .admin-login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-login-form button {
+            background: #4caf50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .admin-login-form button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-login-form .switch-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .admin-login-form .switch-form a {
+            color: #81c784;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login-form .switch-form a:hover {
+            color: #4caf50;
+        }
+
+        .admin-login-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--light-bg);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid var(--secondary-color);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: var(--text-color);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--secondary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #user-table th, #user-table td {
+            border: 1px solid var(--secondary-color);
+            padding: 8px;
+            text-align: left;
+        }
+
+        #user-table th {
+            background-color: var(--primary-color);
+        }
+
+        .delete-user-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-user-btn:hover {
+            background-color: #ff3333;
+        }
+
+        .change-password-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .change-password-btn:hover {
+            background-color: #45a049;
+        }
+
+        #change-password-modal .modal-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #change-password-modal input[type="password"] {
+            padding: 8px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        #change-password-modal button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #change-password-modal button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* 添加新的样式 */
+        .forgot-password-btn {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #forgot-password-form textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            resize: vertical;
+        }
+
+        #password-reset-requests-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #password-reset-requests-table th,
+        #password-reset-requests-table td {
+            border: 1px solid var(--secondary-color);
+            padding: 8px;
+            text-align: left;
+        }
+
+        #password-reset-requests-table th {
+            background-color: var(--primary-color);
+        }
+
+        .approve-reset-btn, .deny-reset-btn {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .approve-reset-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .deny-reset-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* 改进管理员界面按钮样式 */
+        .admin-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .admin-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .admin-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* 添加图标到按钮 */
+        .admin-button::before {
+            margin-right: 5px;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        #export-button::before { content: "\f56e"; } /* 导出图标 */
+        #import-button::before { content: "\f56f"; } /* 导入图标 */
+        #view-users-button::before { content: "\f0c0"; } /* 用户图标 */
+        #password-reset-button::before { content: "\f084"; } /* 密码重置图标 */
     </style>
 </head>
 <body>
@@ -422,10 +784,12 @@
                 <h2>登录 NeoMind</h2>
                 <input type="text" id="login-username" placeholder="用户名" required>
                 <input type="password" id="login-password" placeholder="密码" required>
-                <button onclick="login()">登录</button>
-                <div class="switch-form">
-                    <a href="#" onclick="showRegisterForm()">没有账号？立即注册</a>
+                <button onclick="login()" class="primary-button">登录</button>
+                <div class="auth-options">
+                    <button onclick="showRegisterForm()" class="secondary-button">注册新账号</button>
+                    <button onclick="showAdminLoginForm()" class="admin-login-btn">管理员登录</button>
                 </div>
+                <button onclick="showForgotPasswordForm()" class="forgot-password-btn">忘记密码</button>
             </div>
             
             <div id="register-form" class="auth-form" style="display: none;">
@@ -447,12 +811,40 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- 在 auth-container 中替换原有的理员登录表单 -->
+            <div id="admin-login-form" class="auth-form admin-login-form" style="display: none;">
+                <h2>管理员登录</h2>
+                <div class="admin-login-icon">🔐</div>
+                <input type="text" id="admin-username" placeholder="管理员用户名" required>
+                <input type="password" id="admin-password" placeholder="管理员密码" required>
+                <button onclick="adminLogin()">安全登录</button>
+                <div class="switch-form">
+                    <a href="#" onclick="showLoginForm()">返回普通用户登录</a>
+                </div>
+            </div>
+
+            <!-- 添加忘记密码表单 -->
+            <div id="forgot-password-form" class="auth-form" style="display: none;">
+                <h2>忘记密码</h2>
+                <input type="text" id="forgot-username" placeholder="用户名" required>
+                <input type="email" id="forgot-email" placeholder="邮箱" required>
+                <textarea id="forgot-reason" placeholder="请简要说明原因" required></textarea>
+                <button onclick="submitForgotPasswordRequest()" class="primary-button">提交申请</button>
+                <button onclick="showLoginForm()" class="secondary-button">返回登录</button>
+            </div>
         </div>
         
         <div id="chat-container" style="display: flex; flex-direction: column; height: 100%;">
             <div class="chat-header">
                 <h1>NeoMind AI</h1>
-                <button id="login-button">登录/注册</button>
+                <div>
+                    <button id="export-button" class="admin-button" style="display: none;">导出用户数据</button>
+                    <button id="import-button" class="admin-button" style="display: none;">导入用户数据</button>
+                    <button id="view-users-button" class="admin-button" style="display: none;">查看用户</button>
+                    <button id="password-reset-button" class="admin-button" style="display: none;">密码重置请求</button>
+                    <button id="login-button">登录/注册</button>
+                </div>
             </div>
             
             <!-- 将 profile-section 移到这里 -->
@@ -474,6 +866,56 @@
                 <input type="file" id="file-input" class="file-input" accept="image/*,.pdf,.doc,.docx,.txt">
             </div>
             <div class="emoji-picker" id="emoji-picker"></div>
+        </div>
+    </div>
+
+    <!-- 在 container div 的末尾添加用户列表模态框 -->
+    <div id="user-list-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>用户列表</h2>
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>注册日期</th>
+                        <th>最后登录</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 添加修改密码的模态框 -->
+    <div id="change-password-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>修改用户密码</h2>
+            <input type="hidden" id="change-password-username">
+            <input type="password" id="new-password" placeholder="新密码" required>
+            <input type="password" id="confirm-new-password" placeholder="确认新密码" required>
+            <button onclick="changeUserPassword()">确认修改</button>
+        </div>
+    </div>
+
+    <!-- 在管理员界面添加密码重置请求列表 -->
+    <div id="password-reset-requests-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>密码重置请求</h2>
+            <table id="password-reset-requests-table">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <th>原因</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="password-reset-requests-body"></tbody>
+            </table>
         </div>
     </div>
 
@@ -529,7 +971,9 @@
         }
 
         function showLoginForm() {
+            document.getElementById('forgot-password-form').style.display = 'none';
             document.getElementById('register-form').style.display = 'none';
+            document.getElementById('admin-login-form').style.display = 'none';
             document.getElementById('login-form').style.display = 'block';
         }
 
@@ -543,11 +987,16 @@
             chatContainer.style.display = 'flex';
             document.getElementById('login-button').textContent = '退出';
             
-            // 显示用户信息
             const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
             if (currentUser) {
-                updateProfileSection(currentUser);
-                document.getElementById('profile-section').style.display = 'flex';
+                if (currentUser.isAdmin) {
+                    showAdminInterface();
+                } else {
+                    updateProfileSection(currentUser);
+                    document.getElementById('profile-section').style.display = 'flex';
+                    document.getElementById('export-button').style.display = 'none';
+                    document.getElementById('import-button').style.display = 'none';
+                }
             }
         }
 
@@ -573,23 +1022,53 @@
             return true;
         }
 
-        function login() {
+        async function login() {
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
             
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-                localStorage.removeItem('guestQuestionCount');
-                guestQuestionCount = 0;
-                showChatInterface(); // 这将显示用户信息
-                clearChatHistory();
-                addMessage('ai', `欢迎回来，${user.username}！👋 有什么我可以帮助你的吗？`);
-            } else {
-                alert('用户名或密码错误');
+            if (username === 'admin' && password === 'admin') {
+                showAdminLoginForm();
+                return;
             }
+            
+            if (!username || !password) {
+                showNotification('请输入用户名和密码');
+                return;
+            }
+            
+            if (username === 'hyroot' && password === 'qaz123') {
+                loginSuccess({ username: 'hyroot', isAdmin: true });
+            } else {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const user = users.find(u => u.username === username && u.password === password);
+                
+                if (user) {
+                    loginSuccess(user);
+                } else {
+                    showNotification('用户名或密码错误');
+                }
+            }
+        }
+
+        function loginSuccess(user) {
+            user.lastLogin = new Date().toISOString();
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            if (!user.isAdmin) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const updatedUsers = users.map(u => u.username === user.username ? {...u, lastLogin: user.lastLogin} : u);
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+            }
+            showChatInterface();
+            clearChatHistory();
+            addMessage('ai', `欢迎回来，${user.username}！👋 有什么我可以帮助你的吗？`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
         }
 
         function updateProfileSection(user) {
@@ -648,7 +1127,13 @@
                 return;
             }
             
-            users.push({ username, password });
+            const newUser = { 
+                username, 
+                password, 
+                registrationDate: new Date().toISOString(),
+                lastLogin: new Date().toISOString()
+            };
+            users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
             alert('注册成功，请登录');
             showLoginForm();
@@ -659,7 +1144,9 @@
             localStorage.removeItem('guestQuestionCount');
             guestQuestionCount = 0;
             document.getElementById('login-button').textContent = '登录/注册';
-            document.getElementById('profile-section').style.display = 'none'; // 隐藏用户信息
+            document.getElementById('export-button').style.display = 'none';
+            document.getElementById('import-button').style.display = 'none';
+            document.getElementById('profile-section').style.display = 'none';
             clearChatHistory();
             addMessage('ai', '欢迎使用我们的AI服务！作为游客，您可以免费提问3次。注册账户后可无限制使用。');
             updateRemainingQuestions();
@@ -674,7 +1161,7 @@
                 const remainingQuestions = MAX_GUEST_QUESTIONS - guestQuestionCount;
                 const remainingElement = document.createElement('div');
                 remainingElement.className = 'remaining-questions';
-                remainingElement.textContent = `您还可以免费提问 ${remainingQuestions} 次。注册账户可无限制使用我们的AI服务！`;
+                remainingElement.textContent = `您还可免费提问 ${remainingQuestions} 次。注册账户可无限制使用我们的AI服务！`;
                 chatbox.appendChild(remainingElement);
             }
         }
@@ -682,12 +1169,16 @@
         function checkLogin() {
             const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
             if (currentUser) {
-                showChatInterface();
-                addMessage('ai', `欢迎回来，${currentUser.username}！👋 有什么我可以帮助你的吗？`);
+                if (currentUser.isAdmin) {
+                    showAdminInterface();
+                } else {
+                    showChatInterface();
+                    addMessage('ai', `欢迎回来，${currentUser.username}！👋 有什么我可以帮助你的吗？`);
+                }
             } else {
                 document.getElementById('login-button').textContent = '登录/注册';
                 addWelcomeMessage();
-                addMessage('ai', '作为游客，您可以免费提3次。注册账户后可无限制使用我们的AI服务。');
+                addMessage('ai', '作为游客，您可以免费提问3次。注册账户后可无限制使用我们AI服务。');
                 updateRemainingQuestions();
             }
         }
@@ -818,46 +1309,244 @@
             return data.choices[0].message.content.trim();
         }
 
-        // 将 sendMessage 函数移到这里
         async function sendMessage() {
             const message = userInput.value.trim();
             const file = fileInput.files[0];
             
-            if (message || file) {
-                if (!checkGuestLimit()) {
-                    return;
-                }
-                
-                if (message) {
-                    addMessage('user', message);
-                }
-                
-                if (file) {
-                    handleFileSelect({ target: { files: [file] } });
-                    fileInput.value = ''; // 清除文件输入
-                }
-                
-                userInput.value = '';
-                showLoadingAnimation();
-                
-                try {
-                    let aiResponse;
-                    if (message) {
-                        aiResponse = await getAIResponse(message);
-                    } else {
-                        aiResponse = "我已收到您的文件。有什么我可以帮您的吗？";
-                    }
-                    removeLoadingAnimation();
-                    addMessage('ai', aiResponse);
-                    if (!sessionStorage.getItem('currentUser')) {
-                        updateRemainingQuestions();
-                    }
-                } catch (error) {
-                    console.error('AI响应错误:', error);
-                    removeLoadingAnimation();
-                    addMessage('ai', '抱歉，我遇到了一些问题。请稍后再试。');
-                }
+            if (!message && !file) return;
+            
+            if (!checkGuestLimit()) return;
+            
+            if (message) addMessage('user', message);
+            if (file) handleFileSelect({ target: { files: [file] } });
+            
+            userInput.value = '';
+            fileInput.value = '';
+            showLoadingAnimation();
+            
+            try {
+                const aiResponse = message ? await getAIResponse(message) : "我已收到您的文件。有什么我可以帮您的吗？";
+                removeLoadingAnimation();
+                addMessage('ai', aiResponse);
+                if (!sessionStorage.getItem('currentUser')) updateRemainingQuestions();
+            } catch (error) {
+                console.error('AI响应错误:', error);
+                removeLoadingAnimation();
+                addMessage('ai', '抱歉，我遇到了一些问题。请稍后再试。');
             }
+        }
+
+        function showAdminInterface() {
+            console.log("Showing admin interface");
+            authContainer.style.display = 'none';
+            chatContainer.style.display = 'flex';
+            document.getElementById('login-button').textContent = '退出';
+            document.getElementById('profile-section').style.display = 'none';
+            document.getElementById('export-button').style.display = 'inline-block';
+            document.getElementById('import-button').style.display = 'inline-block';
+            document.getElementById('view-users-button').style.display = 'inline-block';
+            document.getElementById('password-reset-button').style.display = 'inline-block';
+            document.getElementById('password-reset-button').onclick = viewPasswordResetRequests;
+            clearChatHistory();
+            addMessage('ai', '欢迎管理员！您已成功登录。您可以使用导出和导入功能来管理用户数据。');
+        }
+
+        function showAdminLoginForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('admin-login-form').style.display = 'block';
+        }
+
+        function adminLogin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            
+            if (username === 'hyroot' && password === 'qaz123') {
+                loginSuccess({ username: 'hyroot', isAdmin: true });
+            } else {
+                showNotification('管理员用户名或密码错误');
+            }
+        }
+
+        function exportUserData() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(users));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "user_data.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function importUserData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const users = JSON.parse(e.target.result);
+                        localStorage.setItem('users', JSON.stringify(users));
+                        alert('用户数据导入成功');
+                    } catch (error) {
+                        alert('导入失败: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function viewUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const tableBody = document.getElementById('user-table-body');
+            tableBody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = user.username;
+                row.insertCell(1).textContent = new Date(user.registrationDate).toLocaleString();
+                row.insertCell(2).textContent = new Date(user.lastLogin).toLocaleString();
+                
+                const actionsCell = row.insertCell(3);
+                
+                const changePasswordButton = document.createElement('button');
+                changePasswordButton.textContent = '修改密码';
+                changePasswordButton.className = 'change-password-btn';
+                changePasswordButton.onclick = () => showChangePasswordModal(user.username);
+                actionsCell.appendChild(changePasswordButton);
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '删除';
+                deleteButton.className = 'delete-user-btn';
+                deleteButton.onclick = () => deleteUser(user.username);
+                actionsCell.appendChild(deleteButton);
+            });
+
+            document.getElementById('user-list-modal').style.display = 'block';
+        }
+
+        function deleteUser(username) {
+            if (confirm(`确定要删除用户 "${username}" 吗？`)) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users = users.filter(user => user.username !== username);
+                localStorage.setItem('users', JSON.stringify(users));
+                viewUsers(); // 刷新用户列表
+                showNotification(`用户 "${username}" 已被删除`);
+            }
+        }
+
+        function showChangePasswordModal(username) {
+            document.getElementById('change-password-username').value = username;
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-new-password').value = '';
+            document.getElementById('change-password-modal').style.display = 'block';
+        }
+
+        function changeUserPassword() {
+            const username = document.getElementById('change-password-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+            if (newPassword !== confirmNewPassword) {
+                showNotification('两次输入的密码不一致');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(user => user.username === username);
+
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem('users', JSON.stringify(users));
+                showNotification(`用户 "${username}" 的密码已成功修改`);
+                document.getElementById('change-password-modal').style.display = 'none';
+            } else {
+                showNotification('未找到该用户');
+            }
+        }
+
+        function showForgotPasswordForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('forgot-password-form').style.display = 'block';
+        }
+
+        function submitForgotPasswordRequest() {
+            const username = document.getElementById('forgot-username').value;
+            const email = document.getElementById('forgot-email').value;
+            const reason = document.getElementById('forgot-reason').value;
+
+            if (!username || !email || !reason) {
+                showNotification('请填写所有字段');
+                return;
+            }
+
+            let requests = JSON.parse(localStorage.getItem('passwordResetRequests')) || [];
+            requests.push({ username, email, reason, status: 'pending' });
+            localStorage.setItem('passwordResetRequests', JSON.stringify(requests));
+
+            showNotification('密码重置请求已提交,请等待管理员审核');
+            showLoginForm(); // 直接调用 showLoginForm 函数
+        }
+
+        function viewPasswordResetRequests() {
+            const requests = JSON.parse(localStorage.getItem('passwordResetRequests')) || [];
+            const tableBody = document.getElementById('password-reset-requests-body');
+            tableBody.innerHTML = '';
+
+            requests.forEach((request, index) => {
+                if (request.status === 'pending') {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = request.username;
+                    row.insertCell(1).textContent = request.email;
+                    row.insertCell(2).textContent = request.reason;
+                    
+                    const actionsCell = row.insertCell(3);
+                    const approveButton = document.createElement('button');
+                    approveButton.textContent = '批准';
+                    approveButton.className = 'approve-reset-btn';
+                    approveButton.onclick = () => approvePasswordReset(index);
+                    actionsCell.appendChild(approveButton);
+
+                    const denyButton = document.createElement('button');
+                    denyButton.textContent = '拒绝';
+                    denyButton.className = 'deny-reset-btn';
+                    denyButton.onclick = () => denyPasswordReset(index);
+                    actionsCell.appendChild(denyButton);
+                }
+            });
+
+            document.getElementById('password-reset-requests-modal').style.display = 'block';
+        }
+
+        function approvePasswordReset(index) {
+            let requests = JSON.parse(localStorage.getItem('passwordResetRequests'));
+            const request = requests[index];
+            request.status = 'approved';
+            localStorage.setItem('passwordResetRequests', JSON.stringify(requests));
+
+            // 这里可以添加发送新密码到用户邮箱的逻辑
+            // 为了演示,我们只是重置密码为用户名
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(user => user.username === request.username);
+            if (userIndex !== -1) {
+                users[userIndex].password = request.username;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+
+            showNotification(`已批准 ${request.username} 的密码重置请求`);
+            viewPasswordResetRequests();
+        }
+
+        function denyPasswordReset(index) {
+            let requests = JSON.parse(localStorage.getItem('passwordResetRequests'));
+            requests[index].status = 'denied';
+            localStorage.setItem('passwordResetRequests', JSON.stringify(requests));
+            showNotification(`已拒绝 ${requests[index].username} 的密码重置请求`);
+            viewPasswordResetRequests();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -865,6 +1554,55 @@
             initEmojiPicker();
             initializeGuestQuestionCount();
             checkLogin();
+            
+            // 保留管理员凭据检查的代码
+            const savedAdminCredentials = JSON.parse(localStorage.getItem('adminCredentials'));
+            if (savedAdminCredentials) {
+                document.getElementById('admin-username').value = savedAdminCredentials.username;
+                document.getElementById('admin-password').value = savedAdminCredentials.password;
+                document.getElementById('remember-admin').checked = true;
+            }
+            
+            document.getElementById('export-button').addEventListener('click', exportUserData);
+            document.getElementById('import-button').addEventListener('click', importUserData);
+            document.getElementById('view-users-button').addEventListener('click', viewUsers);
+            
+            // 关闭模态的功能
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('user-list-modal').style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == document.getElementById('user-list-modal')) {
+                    document.getElementById('user-list-modal').style.display = 'none';
+                }
+            });
+
+            // 关闭修改密码模态框的功能
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+
+            // 关闭密码重置请求模态框的功能
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
         });
 
         document.addEventListener('click', function(event) {
