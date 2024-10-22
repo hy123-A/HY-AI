@@ -1523,10 +1523,26 @@
             }
 
             let requests = JSON.parse(localStorage.getItem('passwordResetRequests')) || [];
-            requests.push({ username, email, newPassword, reason, status: 'pending' });
+            
+            // 检查是否已存在待处理的请求
+            const pendingRequest = requests.find(req => req.username === username && req.status === 'pending');
+            if (pendingRequest) {
+                showNotification('您已有一个待处理的请求，请等待管理员审核。');
+                return;
+            }
+
+            // 添加新请求
+            requests.push({ 
+                username, 
+                email, 
+                newPassword, 
+                reason, 
+                status: 'pending',
+                timestamp: new Date().toISOString()
+            });
             localStorage.setItem('passwordResetRequests', JSON.stringify(requests));
 
-            showNotification('密码重置请求已提交,请等待管理员审核');
+            showNotification('密码重置请求已提交，请等待管理员审核');
             showLoginForm();
         }
 
@@ -1627,12 +1643,14 @@
             }
 
             const requests = JSON.parse(localStorage.getItem('passwordResetRequests')) || [];
-            const userRequest = requests.find(req => req.username === username);
+            const userRequests = requests.filter(req => req.username === username);
 
             const statusResult = document.getElementById('status-result');
-            if (userRequest) {
+            if (userRequests.length > 0) {
+                // 获取最新的请求
+                const latestRequest = userRequests[userRequests.length - 1];
                 let statusMessage = '';
-                switch(userRequest.status) {
+                switch(latestRequest.status) {
                     case 'pending':
                         statusMessage = '您的请求正在等待管理员审核。';
                         break;
@@ -1640,7 +1658,7 @@
                         statusMessage = '您的请求已被批准。请使用新密码登录。';
                         break;
                     case 'denied':
-                        statusMessage = '您的请求已被拒绝。如有疑问，请联系管理员。';
+                        statusMessage = '您的上一个请求已被拒绝。如有需要，您可以提交新的请求。';
                         break;
                     default:
                         statusMessage = '未找到您的请求状态。';
